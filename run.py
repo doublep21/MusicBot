@@ -144,7 +144,46 @@ log.addHandler(tfh)
 
 
 def finalize_logging():
-    log.info("logging")
+        if os.path.isfile("logs/musicbot.log"):
+        log.info("Moving old musicbot log")
+        try:
+            if os.path.isfile("logs/musicbot.log.last"):
+                os.unlink("logs/musicbot.log.last")
+            os.rename("logs/musicbot.log", "logs/musicbot.log.last")
+        except:
+            pass
+
+    with open("logs/musicbot.log", 'w+', encoding='utf8') as f:
+        tmpfile.seek(0)
+        f.write(tmpfile.read())
+        tmpfile.close()
+
+        f.write('\n')
+        f.write(" PRE-RUN SANITY CHECKS PASSED ".center(80, '#'))
+        f.write('\n\n')
+
+    global tfh
+    log.removeHandler(tfh)
+    del tfh
+
+    fh = logging.FileHandler("logs/musicbot.log", mode='a')
+    fh.setFormatter(logging.Formatter(
+        fmt="[%(relativeCreated).9f] %(name)s-%(levelname)s: %(message)s"
+    ))
+    fh.setLevel(logging.DEBUG)
+    log.addHandler(fh)
+
+    sh.setLevel(logging.INFO)
+
+    dlog = logging.getLogger('discord')
+    dlh = logging.StreamHandler(stream=sys.stdout)
+    dlh.terminator = ''
+    try:
+        dlh.setFormatter(logging.Formatter('.'))
+    except ValueError:
+        dlh.setFormatter(logging.Formatter('.', validate=False)
+                         )  # pylint: disable=unexpected-keyword-arg
+    dlog.addHandler(dlh)
 
 
 def bugger_off(msg="Press enter to continue . . .", code=1):

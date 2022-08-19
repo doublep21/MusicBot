@@ -153,14 +153,7 @@ def finalize_logging():
         except:
             pass
 
-    with open("logs/musicbot.log", "w", encoding="utf8") as f:
-        tmpfile.seek(0)
-        f.write(tmpfile.read())
-        tmpfile.close()
-
-        f.write("\n")
-        f.write(" PRE-RUN SANITY CHECKS PASSED ".center(80, "#"))
-        f.write("\n\n")
+   
 
     global tfh
     log.removeHandler(tfh)

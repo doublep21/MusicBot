@@ -117,9 +117,8 @@ _add_logger_level("VOICEDEBUG", 6)
 log = logging.getLogger(__name__)
 log.setLevel(logging.EVERYTHING)
 
-del fhandler():
-    print("ok")
+
 
 del _func_prototype
 del _add_logger_level
-del fhandler
+

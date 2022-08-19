@@ -144,11 +144,12 @@ log.addHandler(tfh)
 
 
 def finalize_logging():
-    
+    log.info("logging")
 
 
 def bugger_off(msg="Press enter to continue . . .", code=1):
-    
+    input(msg)
+    sys.exit(code)
 
 # TODO: all of this
 def sanity_checks(optional=True):

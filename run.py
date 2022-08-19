@@ -199,20 +199,7 @@ def sanity_checks(optional=True):
     log.info("Starting sanity checks")
     ## Required
 
-    # Make sure we're on Python 3.8+
-    req_ensure_py3()
-
-    # Fix windows encoding fuckery
-    req_ensure_encoding()
-
-    # Make sure we're in a writeable env
-    req_ensure_env()
-
-    # Make our folders if needed
-    req_ensure_folders()
-
-    # For rewrite only
-    req_check_deps()
+    
 
     log.info("Required checks passed.")
 
@@ -221,7 +208,7 @@ def sanity_checks(optional=True):
         return
 
     # Check disk usage
-    opt_check_disk_space()
+    
 
     log.info("Optional checks passed.")
 
